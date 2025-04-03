@@ -1,0 +1,23 @@
+<% layout("/layouts/boilerplate") %>
+<%= success %>
+
+<body>
+    <h3>All Stations</h3>
+
+    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
+        <%for(let listing of allListings){ %>
+            <div class="card col listing-card" >
+                <img src="<%= listing.image %>" class="card-img-top" alt="Station image" style="height:20rem;">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                  <b> <h5 class="card-title"><%=listing.title %></h5> </b>
+                  <p class="card-text">
+                    <%=listing.description %>           
+                  </p>
+                  <a href="/listings/<%= listing._id %>" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            <% } %>
+    </div>
+    
+</body>
