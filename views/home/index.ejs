@@ -1,0 +1,90 @@
+<% layout('layouts/main') %>
+
+<div class="homepage-hero">
+  <div class="hero-overlay">
+    <div class="container">
+      <h1 class="display-4 fw-bold text-white">Indian Railway Station Mapper</h1>
+      <p class="lead text-white">Navigate stations with ease - Find trains, amenities, and services</p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <a href="/map" class="btn btn-primary btn-lg px-4 gap-3">Explore Interactive Map</a>
+        <a href="/services" class="btn btn-outline-light btn-lg px-4">Station Services</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <!-- Quick Access Buttons -->
+  <div class="row justify-content-center g-4">
+    <div class="col-md-4 col-6">
+      <div class="card service-card h-100">
+        <div class="card-body text-center">
+          <img src="/images/train-icon.svg" alt="Train Info" class="service-icon mb-3">
+          <h5 class="card-title">Train Schedules</h5>
+          <p class="card-text">Real-time arrivals & departures</p>
+          <a href="/schedules" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-4 col-6">
+      <div class="card service-card h-100">
+        <div class="card-body text-center">
+          <img src="/images/emergency-icon.svg" alt="Emergency" class="service-icon mb-3">
+          <h5 class="card-title">Emergency</h5>
+          <p class="card-text">Quick access to help</p>
+          <a href="/emergency" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 col-6">
+      <div class="card service-card h-100">
+        <div class="card-body text-center">
+          <img src="/images/women-safety-icon.svg" alt="Women Safety" class="service-icon mb-3">
+          <h5 class="card-title">Women's Safety</h5>
+          <p class="card-text">Dedicated helpline & services</p>
+          <a href="/safety" class="stretched-link"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Station Features Section -->
+  <div class="row mt-5 align-items-center">
+    <div class="col-lg-6">
+      <h2 class="fw-bold mb-4">Discover Station Amenities</h2>
+      <ul class="station-features list-unstyled">
+        <li class="mb-3">
+          <i class="bi bi-geo-alt-fill text-primary me-2"></i>
+          Interactive station maps
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-cup-hot-fill text-primary me-2"></i>
+          Food court & refreshment locations
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-wifi text-primary me-2"></i>
+          Free WiFi zones
+        </li>
+        <li class="mb-3">
+          <i class="bi bi-bag-plus-fill text-primary me-2"></i>
+          Luggage services
+        </li>
+      </ul>
+    </div>
+    <div class="col-lg-6">
+      <img src="/images/station-map-preview.jpg" alt="Station Map Preview" class="img-fluid rounded shadow">
+    </div>
+  </div>
+</div>
+
+<!-- Live Updates Section -->
+<div class="bg-light py-5 mt-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Live Station Updates</h2>
+    <div class="row" id="liveUpdates">
+      <!-- Will be populated by JavaScript -->
+    </div>
+  </div>
+</div>

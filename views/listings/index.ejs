@@ -1,5 +1,83 @@
 <% layout("/layouts/boilerplate") %>
-<%= success %>
+
+<!-- 1. Breadcrumb Navigation -->
+<nav aria-label="breadcrumb" class="mt-3">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/" class="nav-link">Back to Home</a></li>
+  </ol>
+</nav>
+
+<!-- 2. Search + Filter Row -->
+<div class="row my-4 g-3 align-item-center">
+  <!-- Search Bar -->
+  <div class="col-md-6">
+    <form action="/listings/search" method="GET" class="input-group">
+      <input 
+         type="search" 
+         name="q" 
+         class="form-control" 
+         placeholder="Search stations by name, city or location..."
+         value="<%= typeof query !== 'undefined' ? query : '' %>"
+       >
+      <button class="btn btn-primary" type="submit">
+        <i class="bi bi-search"></i> Search
+      </button>
+    </form>
+  </div>
+  
+  <!-- City Filter Dropdown -->
+<div class="col-md-5">
+  <% if (typeof uniqueCities !== 'undefined' && uniqueCities.length) { %>
+    <select class="form-select" onchange="window.location.href=this.value ? '/listings/city/'+this.value : '/listings'">
+      <option value="">All Cities</option>
+      <% uniqueCities.forEach(city => { %>
+        <option 
+          value="<%= city %>"
+          <%= (typeof selectedCity !== 'undefined' && selectedCity === city) ? 'selected' : '' %>
+        >
+          <%= city %>
+        </option>
+      <% }) %>
+    </select>
+  <% } else { %>
+    <div class="alert alert-warning">No cities available</div>
+  <% } %>
+</div>
+
+<!-- 3. Stats Cards -->
+<div class="row mb-4 mt-3">
+  <div class="col-md-4">
+    <div class="card text-white bg-primary">
+      <div class="card-body">
+        <h5 class="card-title"><%= allListings.length %></h5>
+        <p class="card-text">Total Stations</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-success">
+      <div class="card-body">
+        <h5 class="card-title"><%= uniqueCities.length %></h5>
+        <p class="card-text">Cities Covered</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card text-white bg-info">
+      <div class="card-body">
+        <h5 class="card-title">24/7</h5>
+        <p class="card-text">Operational</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Main Content (Your existing station list) -->
+<div class="row">
+  <% allListings.forEach(listing => { %>
+    <!-- Keep your existing station cards here -->
+  <% }) %>
+</div>
 
 <body>
     <h3>All Stations</h3>

@@ -1,0 +1,21 @@
+<% layout("layouts/boilerplate") %>
+
+<div class="container mt-4 mb-4">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h5>Station Help Bot</h5>
+    </div>
+    <div class="card-body">
+      <div id="chatBox" class="chat-container"></div>
+      <div class="input-group mt-3">
+        <input type="text" id="userInput" class="form-control" placeholder="Ask about platforms, tickets, parking...">
+        <button id="sendBtn" class="btn btn-primary">
+          <i class="bi bi-send-fill"></i> Send
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<link rel="stylesheet" href="/css/chatbot.css">
+<script src="/js/chatbot.js"></script>

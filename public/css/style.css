@@ -47,6 +47,7 @@ body{
 .f-info {
     text-align: center;
     height: 8rem;
+    width: 100%;
     background-color: #ebebeb;
     display: flex;
     flex-wrap: wrap;
@@ -93,3 +94,9 @@ body{
     position: relative;
     z-index: 2;
 }
+
+/* Map */
+#map { 
+    height: 600px; 
+    width: 80vh;
+ }

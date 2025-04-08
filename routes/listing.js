@@ -5,6 +5,7 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const ExpressError = require("../utils/ExpressError.js");
 const {listingSchema }= require("../schema.js");
 
+const listingController = require("../controllers/listing.js");
 
 const validateListing = (req,res,next) => {
     const {error} =listingSchema.validate(req.body);
@@ -17,27 +18,76 @@ const validateListing = (req,res,next) => {
     {
         next();
     }
-}
+};
 
-//index route
-router.get(
-    "/", 
-    wrapAsync (async (req,res) => {
-    const allListings = await Listing.find({})
-    res.render("./listings/index.ejs",{allListings});
-}));
+// Search route
+router.get("/search", async (req, res) => {
+    try {
+      const query = req.query.q?.toLowerCase() || "";
+      const allListings = await Listing.find({
+        $or: [
+          { title: { $regex: query, $options: "i" } },
+          { city: { $regex: query, $options: "i" } },
+          { location: { $regex: query, $options: "i" } }
+        ]
+      });
+      
+      // Get ALL unique cities (not just from search results)
+      const allCities = await Listing.distinct("city");
+      
+      res.render("listings/index", { 
+        allListings,
+        uniqueCities: allCities, // Pass all cities for dropdown
+        query: query,
+        selectedCity: null // No city selected during search
+      });
+    } catch (err) {
+      req.flash("error", "Search failed");
+      res.redirect("/listings");
+    }
+  });
+  
+  // Filter by city route
+  router.get("/city/:city", async (req, res) => {
+    try {
+      const allListings = await Listing.find({ city: req.params.city });
+      const allCities = await Listing.distinct("city");
+      
+      res.render("listings/index", { 
+        allListings,
+        uniqueCities: allCities,
+        selectedCity: req.params.city
+      });
+    } catch (err) {
+      req.flash("error", "Filter failed");
+      res.redirect("/listings");
+    }
+  });
+  
+  // Main index route (keep your existing but modify slightly)
+  router.get("/", async (req, res) => {
+    try {
+      const allListings = await Listing.find({});
+      const allCities = await Listing.distinct("city");
+      
+      res.render("listings/index", { 
+        allListings,
+        uniqueCities: allCities,
+        selectedCity: null
+      });
+    } catch (err) {
+      req.flash("error", "Failed to load stations");
+      res.redirect("/");
+    }
+  });
+
+router
+  .route("/")
+  .get(wrapAsync(listingController.index))
 
 //show route
-router.get(
-    "/:id", 
-    wrapAsync (async (req,res) => {
-    let {id} = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
-    if(!listing){
-        req.flash("error","Station you requested does not exist!");
-        return res.redirect("/listings");
-    }
-    res.render("./listings/show.ejs",{listing});
-}));
+router.get("/:id", wrapAsync (listingController.showListing));
+
+
 
 module.exports = router;

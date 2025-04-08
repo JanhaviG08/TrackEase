@@ -1,0 +1,68 @@
+/* Hero Section */
+.homepage-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('/images/station-hero.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Service Cards */
+  .service-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  }
+  
+  .service-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  
+  /* Station Features */
+  .station-features li {
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: rgba(13, 110, 253, 0.05);
+    transition: background-color 0.3s;
+  }
+  
+  .station-features li:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .homepage-hero {
+      height: 60vh;
+    }
+    
+    .hero-overlay h1 {
+      font-size: 2.5rem;
+    }
+  }
